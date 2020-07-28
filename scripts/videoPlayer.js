@@ -30,7 +30,9 @@ export const videoPlayerInit = () => {
         videoPlayer.currentTime = 0;
     };
 
-    videoPlayer.addEventListener("click", togglePlay);
+    const addZero = n => n < 10 ?
+
+        videoPlayer.addEventListener("click", togglePlay);
     videoButtonPlay.addEventListener('click', togglePlay);
 
     videoPlayer.addEventListener('play', toggleIcon);
@@ -41,6 +43,14 @@ export const videoPlayerInit = () => {
     videoPlayer.addEventListener('timeupdate', () => {
         const cuurentTime = videoPlayer.currentTime;
         const durationTime = videoPlayer.duration;
-        console.log('durationTime: ', cuurentTime);
+
+        let minutePassed = Math.floor(cuurentTime / 60);
+        let secondsPassed = Math.floor(cuurentTime % 60);
+
+        let minuteTotal = Math.floor(durationTime / 60);
+        let secondsTotal = Math.floor(durationTime % 60);
+
+        videoTimePassed.textContent = minutePassed + ':' + secondsPassed;
+        videoTimeTotal.textContent = minuteTotal + ':' + secondsTotal;
     });
 };
