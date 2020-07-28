@@ -25,6 +25,22 @@ export const videoPlayerInit = () => {
         toggleIcon();
     }
 
+    const stopPlay = () => {
+        videoPlayer.pause();
+        videoPlayer.currentTime = 0;
+    };
+
     videoPlayer.addEventListener("click", togglePlay);
     videoButtonPlay.addEventListener('click', togglePlay);
+
+    videoPlayer.addEventListener('play', toggleIcon);
+    videoPlayer.addEventListener('pause', toggleIcon);
+
+    videoButtonStop.addEventListener('click', stopPlay)
+
+    videoPlayer.addEventListener('timeupdate', () => {
+        const cuurentTime = videoPlayer.currentTime;
+        const durationTime = videoPlayer.duration;
+        console.log('durationTime: ', cuurentTime);
+    });
 };
