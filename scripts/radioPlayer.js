@@ -10,4 +10,13 @@ export const radioPlayerInit = () => {
     audio.type = 'audio/acc';
 
     radioStop.disabled = true;
+
+    radioNavigation.addEventListener('change', event => {
+        const target = event.target;
+        audio.src = target.dataset.radioStantion;
+
+        audio.play();
+    });
+
+    radioStop
 };
