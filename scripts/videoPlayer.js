@@ -4,7 +4,8 @@ export const videoPlayerInit = () => {
         videoButtonStop = document.querySelector(".video-button__stop"),
         videoTimePassed = document.querySelector(".video-time__passed"),
         videoProgress = document.querySelector(".video-progress"),
-        videoTimeTotal = document.querySelector(".video-time__total");
+        videoTimeTotal = document.querySelector(".video-time__total"),
+        videoFullscreen = document.querySelector(".video-fullscreen");
 
     const toggleIcon = () => {
         if (videoPlayer.paused) {
@@ -23,24 +24,24 @@ export const videoPlayerInit = () => {
             videoPlayer.pause();
         }
         toggleIcon();
-    }
+    };
 
     const stopPlay = () => {
         videoPlayer.pause();
         videoPlayer.currentTime = 0;
     };
 
-    const addZero = n => n < 10 ? '0' + n : n;
+    const addZero = (n) => (n < 10 ? "0" + n : n);
 
     videoPlayer.addEventListener("click", togglePlay);
-    videoButtonPlay.addEventListener('click', togglePlay);
+    videoButtonPlay.addEventListener("click", togglePlay);
 
-    videoPlayer.addEventListener('play', toggleIcon);
-    videoPlayer.addEventListener('pause', toggleIcon);
+    videoPlayer.addEventListener("play", toggleIcon);
+    videoPlayer.addEventListener("pause", toggleIcon);
 
-    videoButtonStop.addEventListener('click', stopPlay)
+    videoButtonStop.addEventListener("click", stopPlay);
 
-    videoPlayer.addEventListener('timeupdate', () => {
+    videoPlayer.addEventListener("timeupdate", () => {
         const currentTime = videoPlayer.currentTime;
         const durationTime = videoPlayer.duration;
 
@@ -52,14 +53,22 @@ export const videoPlayerInit = () => {
         let minuteTotal = Math.floor(durationTime / 60);
         let secondsTotal = Math.floor(durationTime % 60);
 
-        videoTimePassed.textContent = `${addZero(minutePassed)}:${addZero(secondsPassed)}`;
-        videoTimeTotal.textContent = `${addZero(minuteTotal)}:${addZero(secondsTotal)}`;
+        videoTimePassed.textContent = `${addZero(minutePassed)}:${addZero(
+      secondsPassed
+    )}`;
+        videoTimeTotal.textContent = `${addZero(minuteTotal)}:${addZero(
+      secondsTotal
+    )}`;
     });
 
-    videoProgress.addEventListener('change', () => {
+    videoProgress.addEventListener("change", () => {
         const durationTime = videoPlayer.duration;
         const value = videoProgress.value;
 
         videoPlayer.currentTime = (value * durationTime) / 100;
+    });
+
+    videoFullscreen.addEventListener("click", () => {
+        videoPlayer.webkitEnterFullScreen();
     });
 };
