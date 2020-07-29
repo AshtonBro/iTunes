@@ -763,3 +763,11 @@ input[type=range]:focus::-ms-fill-upper {
 .video-volume {
     max-width: 100px;
 }
+
+.radio-volume {
+    max-width: 100px;
+}
+
+.radio-icon {
+    margin-left: 15px;
+}
