@@ -74,4 +74,14 @@ export const musicPlayerInit = () => {
         nextTrack();
         audioPlayer.play();
     });
+
+    audioPlayer.addEventListener('timeupdate', () => {
+        const duration = audioPlayer.duration;
+        const currentTime = audioPlayer.currentTime;
+        const progress = (currentTime / duration) * 100;
+
+        audioProgressTiming.style.width = progress + '%';
+
+
+    });
 };
