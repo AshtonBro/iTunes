@@ -42,7 +42,7 @@ export const musicPlayerInit = () => {
     };
 
     const nextTrack = () => {
-        if (trackIndex === playlist - 1) {
+        if (trackIndex === playlist.length - 1) {
             trackIndex = 0;
         } else {
             trackIndex++;
@@ -86,10 +86,10 @@ export const musicPlayerInit = () => {
 
         audioProgressTiming.style.width = progress + '%';
 
-        const minutesPassed = Math.floor(currentTime / 60) || '00';;
-        const secondsPassed = Math.floor(currentTime % 60) || '00';;
-        const minutesTotal = Math.floor(duration / 60) || '00';;
-        const secondsTotal = Math.floor(duration % 60) || '00';;
+        const minutesPassed = Math.floor(currentTime / 60); // || '00';
+        const secondsPassed = Math.floor(currentTime % 60); // || '00';
+        const minutesTotal = Math.floor(duration / 60) || '0';
+        const secondsTotal = Math.floor(duration % 60) || '0';
 
         audioTimePassed.textContent = `${addZero(minutesPassed)}:${addZero(secondsPassed)}`;
         audioTimeTotal.textContent = `${addZero(minutesTotal)}:${addZero(secondsTotal)}`;
