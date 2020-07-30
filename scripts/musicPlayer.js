@@ -94,4 +94,11 @@ export const musicPlayerInit = () => {
         audioTimePassed.textContent = `${addZero(minutesPassed)}:${addZero(secondsPassed)}`;
         audioTimeTotal.textContent = `${addZero(minutesTotal)}:${addZero(secondsTotal)}`;
     });
+
+    audioProgress.addEventListener('click', event => {
+        const x = event.offsetX;
+        const allTimeTrack = audioProgress.clientWidth;
+        const progress = (x / allTimeTrack) * audioPlayer.duration;
+        audioPlayer.currentTime = progress;
+    });
 };
