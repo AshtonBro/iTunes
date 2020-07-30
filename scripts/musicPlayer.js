@@ -1,3 +1,7 @@
+import {
+    addZero
+} from './supScript.js';
+
 export const musicPlayerInit = () => {
     const audio = document.querySelector('.audio'),
         audioImg = document.querySelector('.audio-img'),
@@ -82,6 +86,12 @@ export const musicPlayerInit = () => {
 
         audioProgressTiming.style.width = progress + '%';
 
+        const minutesPassed = Math.floor(currentTime / 60) || '00';;
+        const secondsPassed = Math.floor(currentTime % 60) || '00';;
+        const minutesTotal = Math.floor(duration / 60) || '00';;
+        const secondsTotal = Math.floor(duration % 60) || '00';;
 
+        audioTimePassed.textContent = `${addZero(minutesPassed)}:${addZero(secondsPassed)}`;
+        audioTimeTotal.textContent = `${addZero(minutesTotal)}:${addZero(secondsTotal)}`;
     });
 };
