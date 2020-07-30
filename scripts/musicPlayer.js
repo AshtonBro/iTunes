@@ -63,14 +63,15 @@ export const musicPlayerInit = () => {
             audioHeader.textContent = track.toUpperCase();
         }
         if (target.classList.contains('audio-button__next')) {
-
+            nextTrack();
         }
         if (target.classList.contains('audio-button__prev')) {
-
+            prevTrack();
         }
     });
 
     audioPlayer.addEventListener('ended', () => {
-
+        nextTrack();
+        audioPlayer.play();
     });
 };
