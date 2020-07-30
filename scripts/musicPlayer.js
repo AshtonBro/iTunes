@@ -17,6 +17,7 @@ export const musicPlayerInit = () => {
     const loadTrack = () => {
         const isPlayed = audioPlayer.paused;
         const track = playlist[trackIndex];
+        audioHeader.textContent = track.toUpperCase();
         audioImg.src = `/audio/${track}.jpg`
         audioPlayer.src = `/audio/${track}.mp3`;
 
@@ -25,6 +26,24 @@ export const musicPlayerInit = () => {
         } else {
             audioPlayer.play();
         }
+    };
+
+    const prevTrack = () => {
+        if (trackIndex != 0) {
+            trackIndex--;
+        } else {
+            trackIndex = playlist.length - 1;
+        }
+        loadTrack();
+    };
+
+    const nextTrack = () => {
+        if (trackIndex === playlist - 1) {
+            trackIndex = 0;
+        } else {
+            trackIndex++;
+        }
+        loadTrack();
     };
 
     audioNavigation.addEventListener('click', event => {
@@ -39,22 +58,19 @@ export const musicPlayerInit = () => {
             } else {
                 audioPlayer.pause();
             }
+
+            const track = playlist[trackIndex];
+            audioHeader.textContent = track.toUpperCase();
         }
         if (target.classList.contains('audio-button__next')) {
-            if (trackIndex === playlist - 1) {
-                trackIndex = 0;
-            } else {
-                trackIndex++;
-            }
-            loadTrack();
+
         }
         if (target.classList.contains('audio-button__prev')) {
-            if (trackIndex != 0) {
-                trackIndex--;
-            } else {
-                trackIndex = playlist.length - 1;
-            }
-            loadTrack();
+
         }
+    });
+
+    audioPlayer.addEventListener('ended', () => {
+
     });
 };
