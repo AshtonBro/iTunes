@@ -43,7 +43,6 @@ export const radioPlayerInit = () => {
 
     radioStop.disabled = false;
     audio.src = target.dataset.radioStantion;
-
     audio.play();
     changeIconPlay();
   });
