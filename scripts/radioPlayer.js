@@ -1,75 +1,73 @@
 export const radioPlayerInit = () => {
-    const radio = document.querySelector('.radio'),
-        radioCoverImg = document.querySelector('.radio-cover__img'),
-        radioHeaderBig = document.querySelector('.radio-header__big'),
-        radioNavigation = document.querySelector('.radio-navigation'),
-        radioItem = document.querySelectorAll('.radio-item'),
-        radioStop = document.querySelector('.radio-stop'),
-        radioVolume = document.querySelector('.radio-volume'),
-        radioMute = document.querySelector('.radio-mute');
-    console.log('radioMute: ', radioMute);
+  const radio = document.querySelector(".radio"),
+    radioCoverImg = document.querySelector(".radio-cover__img"),
+    radioHeaderBig = document.querySelector(".radio-header__big"),
+    radioNavigation = document.querySelector(".radio-navigation"),
+    radioItem = document.querySelectorAll(".radio-item"),
+    radioStop = document.querySelector(".radio-stop"),
+    radioVolume = document.querySelector(".radio-volume"),
+    radioMute = document.querySelector(".radio-mute");
 
-    let prevVolume = 1;
-    const audio = new Audio();
-    audio.type = 'audio/acc';
-    radioStop.disabled = true;
+  let prevVolume = 1;
+  const audio = new Audio();
+  audio.type = "audio/acc";
+  radioStop.disabled = true;
 
-    const changeIconPlay = () => {
-        if (audio.paused) {
-            radio.classList.remove('play')
-            radioStop.classList.add('fa-play');
-            radioStop.classList.remove('fa-stop');
-        } else {
-            radio.classList.add('play')
-            radioStop.classList.add('fa-stop');
-            radioStop.classList.remove('fa-play');
-        }
-    };
-
-    const selectItem = elem => {
-        radioItem.forEach(item => item.classList.remove('select'));
-        elem.classList.add('select');
+  const changeIconPlay = () => {
+    if (audio.paused) {
+      radio.classList.remove("play");
+      radioStop.classList.add("fa-play");
+      radioStop.classList.remove("fa-stop");
+    } else {
+      radio.classList.add("play");
+      radioStop.classList.add("fa-stop");
+      radioStop.classList.remove("fa-play");
     }
+  };
 
-    radioNavigation.addEventListener('change', event => {
-        const target = event.target;
-        const parrent = target.closest('.radio-item');
-        selectItem(parrent);
+  const selectItem = (elem) => {
+    radioItem.forEach((item) => item.classList.remove("select"));
+    elem.classList.add("select");
+  };
 
-        const title = parrent.querySelector('.radio-name').textContent;
-        radioHeaderBig.textContent = title;
+  radioNavigation.addEventListener("change", (event) => {
+    const target = event.target;
+    const parrent = target.closest(".radio-item");
+    selectItem(parrent);
 
-        const img = parrent.querySelector('.radio-img').src;
-        radioCoverImg.src = img;
+    const title = parrent.querySelector(".radio-name").textContent;
+    radioHeaderBig.textContent = title;
 
-        radioStop.disabled = false;
-        audio.src = target.dataset.radioStantion;
+    const img = parrent.querySelector(".radio-img").src;
+    radioCoverImg.src = img;
 
-        audio.play();
-        changeIconPlay();
-    });
+    radioStop.disabled = false;
+    audio.src = target.dataset.radioStantion;
 
-    radioStop.addEventListener('click', () => {
-        if (audio.paused) {
-            audio.play();
-        } else {
-            audio.pause();
-        }
-        changeIconPlay();
-    });
+    audio.play();
+    changeIconPlay();
+  });
 
-    radioVolume.addEventListener('input', () => {
-        audio.volume = radioVolume.value / 100;
-        prevVolume = audio.volume;
-    })
+  radioStop.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+    changeIconPlay();
+  });
 
-    radioMute.addEventListener('click', () => {
-        if (audio.volume) {
-            prevVolume = audio.volume;
-            audio.volume = 0;
-        } else {
-            audio.volume = prevVolume;
-        }
-    });
+  radioVolume.addEventListener("input", () => {
+    audio.volume = radioVolume.value / 100;
+    prevVolume = audio.volume;
+  });
 
+  radioMute.addEventListener("click", () => {
+    if (audio.volume) {
+      prevVolume = audio.volume;
+      audio.volume = 0;
+    } else {
+      audio.volume = prevVolume;
+    }
+  });
 };
