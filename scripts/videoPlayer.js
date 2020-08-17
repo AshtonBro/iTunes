@@ -36,24 +36,17 @@ export const videoPlayerInit = () => {
 
     videoPlayer.addEventListener("click", togglePlay);
     videoButtonPlay.addEventListener("click", togglePlay);
-
     videoPlayer.addEventListener("play", toggleIcon);
     videoPlayer.addEventListener("pause", toggleIcon);
-
     videoButtonStop.addEventListener("click", stopPlay);
-
     videoPlayer.addEventListener("timeupdate", () => {
         const currentTime = videoPlayer.currentTime;
         const durationTime = videoPlayer.duration;
-
         videoProgress.value = (currentTime / durationTime) * 100;
-
         let minutePassed = Math.floor(currentTime / 60);
         let secondsPassed = Math.floor(currentTime % 60);
-
         let minuteTotal = Math.floor(durationTime / 60);
         let secondsTotal = Math.floor(durationTime % 60);
-
         videoTimePassed.textContent = `${addZero(minutePassed)}:${addZero(
       secondsPassed
     )}`;
@@ -65,7 +58,6 @@ export const videoPlayerInit = () => {
     videoProgress.addEventListener("change", () => {
         const durationTime = videoPlayer.duration;
         const value = videoProgress.value;
-
         videoPlayer.currentTime = (value * durationTime) / 100;
     });
 
